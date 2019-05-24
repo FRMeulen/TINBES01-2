@@ -41,7 +41,7 @@ static void *block_alloc(size_t n)
 		new_block = head;
 		
 		//	Assign properties.
-		new_block->addr = &kern_end;
+		new_block->addr = &kern_end + sizeof(struct block);
 		new_block->size = n;
 		new_block->used = true;
 		new_block->next = NULL;
@@ -58,14 +58,14 @@ static void *block_alloc(size_t n)
 		}
 
 		//	Store block properties.
-		new_block->addr = temp->addr + sizeof(struct block);
+		new_block->addr = temp->addr + temp->size + sizeof(struct block);
 		new_block->size = n;
 		new_block->used = true;
 		new_block->next = NULL;
 		temp->next = new_block->addr;
 	}
 
-	return new_block->addr + sizeof(struct block);
+	return new_block->addr;
 
 }
 
