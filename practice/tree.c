@@ -39,14 +39,30 @@ void print_alfabetical(struct node *node)
 {
 	if (node->left)
 	{
-		print(node->left);
+		print_alfabetical(node->left);
 	}
 
-	printf("Stored name:\t%s\t\t at depth:\t%d.\n", node->stored_name, node->depth);
+	printf("Storing: %s\t at depth: %d.\n", node->stored_name, node->depth);
 
 	if (node->right)
 	{
-		print(node->right);
+		print_alfabetical(node->right);
 	}
 
+}
+
+void clear(struct node *node)
+{
+	if (node->left)
+	{
+		clear(node->left);
+	}
+
+	if (node->right)
+	{
+		clear(node->right);
+	}
+
+	free(node);
+	printf("Freeing: %s\t from depth: %d.\n", node->stored_name, node->depth);
 }

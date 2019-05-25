@@ -13,3 +13,4 @@ struct node {
 
 void store(struct node *parent, char *name);
 void print_alfabetical(struct node *node);
+void clear(struct node *node);

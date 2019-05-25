@@ -22,4 +22,8 @@ void main(void)
 
 	//	Print result.
 	print_alfabetical(root);
+
+	//	Clearing.
+	printf("\n");
+	clear(root);
 }
