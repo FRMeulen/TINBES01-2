@@ -1,68 +1,86 @@
 #include "tree.h"
 
-void store(struct node *parent, char* name)
+struct Node *create_node(char *name)
 {
-	struct node *new_node = malloc(sizeof(struct node));
+	struct Node *new_node = malloc(sizeof(struct Node));
 	strcpy(new_node->stored_name, name);
-	new_node->left = NULL;
-	new_node->right = NULL;
-	new_node->depth = parent->depth + 1;
+	new_node->next = NULL;
+	new_node->children_head = NULL;
+	new_node->depth = 0;
 
-	if (name[0] < parent->stored_name[0])
+	return new_node;
+}
+
+void store(struct Node *parent, char* name)
+{
+	if (!parent->children_head)
 	{
-		if (!parent->left)
-		{
-			parent->left = new_node;
-		}
-
-		else
-		{
-			store(parent->left, name);
-		}
+		parent->children_head = create_node(name);
 	}
-
 	else
 	{
-		if (!parent->right)
+		struct Node *temp = parent->children_head;
+		while (temp->next)
 		{
-			parent->right = new_node;
+			temp = temp->next;
 		}
 
+		struct Node *new_node = create_node(name);
+		temp->next = new_node;
+		new_node->prev = temp;
+	}
+}
+
+void print_tree(struct Node *node, int indentation)
+{
+	indent(indentation);
+	printf("%s\n", node->stored_name);
+
+	if (node->children_head)
+	{
+		struct Node *temp = node->children_head;
+		print_tree(temp, indentation + 1);
+		while (temp->next)
+		{
+			temp = temp->next;
+			print_tree(temp, indentation + 1);
+		}
+	}
+}
+
+void indent(int requested_indentation)
+{
+	for (int i = 0; i < requested_indentation; i++)
+	{
+		if (i == requested_indentation - 1)
+		{
+			printf(" |-");
+		}
 		else
 		{
-			store(parent->right, name);
+			printf(" | ");
 		}
 	}
 }
 
-void print_alfabetical(struct node *node)
+void clear(struct Node *node)
 {
-	if (node->left)
+	if (node->children_head)
 	{
-		print_alfabetical(node->left);
+		struct Node *temp = node->children_head;
+		while (temp->next)
+		{
+			temp = temp->next;
+		}
+
+		while (temp->prev)
+		{
+			temp = temp->prev;
+			clear(temp->next);
+		}
+		clear(temp);
 	}
 
-	printf("Storing: %s\t at depth: %d.\n", node->stored_name, node->depth);
-
-	if (node->right)
-	{
-		print_alfabetical(node->right);
-	}
-
-}
-
-void clear(struct node *node)
-{
-	if (node->left)
-	{
-		clear(node->left);
-	}
-
-	if (node->right)
-	{
-		clear(node->right);
-	}
-
+	printf("Freeing: %s.\n", node->stored_name);
 	free(node);
-	printf("Freeing: %s\t from depth: %d.\n", node->stored_name, node->depth);
 }

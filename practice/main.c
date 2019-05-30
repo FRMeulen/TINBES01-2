@@ -2,28 +2,31 @@
 
 void main(void)
 {
+	//	Tracing.
+	printf("[MAIN]\t-- Main method started.\n");
+
 	//	Make root node.
-	struct node *root = malloc(sizeof(struct node));
-	strcpy(root->stored_name, "ROOT");
-	root->left = NULL;
-	root->right = NULL;
-	root->depth = 0;
+	struct Node *root_node = create_node("ROOT");
 
 	//	Execute program.
-	store(root, "Falco");
-	store(root, "Chris");
-	store(root, "Jasper");
-	store(root, "Kirty");
-	store(root, "Thomas");
-	store(root, "Bryan");
-	store(root, "Damian");
-	store(root, "Noelle");
-	store(root, "Sarah");
+	store(root_node, "Falco");
+	store(root_node, "Chris");
+	store(root_node, "Dane");
+	store(root_node->children_head, "Jasper");
+	store(root_node->children_head->next, "Kirty");
+	store(root_node->children_head, "Thomas");
+	store(root_node->children_head->next->next, "Bryan");
+	store(root_node->children_head->children_head, "Damian");
+	store(root_node->children_head->children_head, "Noelle");
+	store(root_node->children_head->children_head->next, "Sarah");
 
-	//	Print result.
-	print_alfabetical(root);
+	//	Print tree.
+	print_tree(root_node, 0);
 
 	//	Clearing.
 	printf("\n");
-	clear(root);
+	clear(root_node);
+
+	//	Tracing.
+	printf("[MAIN]\t-- Main method ended.\n");
 }

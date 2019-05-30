@@ -4,13 +4,16 @@
 #include <stdio.h>
 #include <string.h>
 
-struct node {
-	struct node *left;
-	struct node *right;
+struct Node {
+	struct Node *prev;
+	struct Node *next;
+	struct Node *children_head;
 	char stored_name[10];
 	int depth;
 };
 
-void store(struct node *parent, char *name);
-void print_alfabetical(struct node *node);
-void clear(struct node *node);
+struct Node *create_node(char *name);
+void store(struct Node *parent, char *name);
+void print_tree(struct Node *node, int indentation);
+void indent(int count);
+void clear(struct Node *node);
