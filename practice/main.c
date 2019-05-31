@@ -1,10 +1,9 @@
 #include "tree.h"
+#include <sys/types.h>
+#include <dirent.h>
 
 void main(void)
 {
-	//	Tracing.
-	printf("[MAIN]\t-- Main method started.\n");
-
 	//	Make root node.
 	struct Node *root_node = create_node("ROOT");
 
@@ -26,7 +25,4 @@ void main(void)
 	//	Clearing.
 	printf("\n");
 	clear(root_node);
-
-	//	Tracing.
-	printf("[MAIN]\t-- Main method ended.\n");
 }

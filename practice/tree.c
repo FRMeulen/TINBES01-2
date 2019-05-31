@@ -81,6 +81,10 @@ void clear(struct Node *node)
 		clear(temp);
 	}
 
+	if (node->prev)
+	{
+		node->prev->next = NULL;
+	}
 	printf("Freeing: %s.\n", node->stored_name);
 	free(node);
 }
