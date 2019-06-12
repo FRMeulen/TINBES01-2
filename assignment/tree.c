@@ -6,8 +6,8 @@
 
 #include "tree.h"
 
-struct Node *create_node(char *name)
-{
+struct Node *create_node(char *name) {
+	
 	struct Node *new_node = malloc(sizeof(struct Node));
 	strcpy(new_node->stored_name, name);
 	new_node->next = NULL;
@@ -20,21 +20,20 @@ struct Node *create_node(char *name)
 	return new_node;
 }
 
-void store(struct Node *parent, char* name)
-{
-	if (!parent->children_head)
-	{
+void store(struct Node *parent, char* name) {
+
+	if (!parent->children_head) {
 		struct Node *new_node = create_node(name);
 		parent->children_head = new_node;
 		new_node->parent = parent;
 		parent->children_count += 1;
 
 	}
-	else
-	{
+	
+	else {
 		struct Node *temp = parent->children_head;
-		while (temp->next)
-		{
+		
+		while (temp->next) {
 			temp = temp->next;
 		}
 
@@ -46,60 +45,61 @@ void store(struct Node *parent, char* name)
 	}
 }
 
-void print_tree(struct Node *node, int indentation)
-{
+void print_tree(struct Node *node, struct Visitor *visitor, int indentation) {
+	
 	indent(indentation);
-	printf("%s\n", node->stored_name);
+	if (node == visitor->current) {
+		printf(">%s<\n", node->stored_name);
+	}
 
-	if (node->children_head)
-	{
+	else {
+		printf("%s\n", node->stored_name);
+	}
+
+	if (node->children_head) {
 		struct Node *temp = node->children_head;
-		print_tree(temp, indentation + 1);
-		while (temp->next)
-		{
+		print_tree(temp, visitor, indentation + 1);
+		
+		while (temp->next) {
 			temp = temp->next;
-			print_tree(temp, indentation + 1);
+			print_tree(temp, visitor, indentation + 1);
 		}
 	}
 }
 
-void indent(int requested_indentation)
-{
-	for (int i = 0; i < requested_indentation; i++)
-	{
-		if (i == requested_indentation - 1)
-		{
+void indent(int requested_indentation) {
+
+	for (int i = 0; i < requested_indentation; i++) {
+		if (i == requested_indentation - 1) {
 			printf(" |-");
 		}
-		else
-		{
+		
+		else {
 			printf(" | ");
 		}
 	}
 }
 
-void clear(struct Node *node)
-{
-	if (node->children_head)
-	{
+void clear(struct Node *node) {
+
+	if (node->children_head) {
 		struct Node *temp = node->children_head;
-		while (temp->next)
-		{
+		while (temp->next) {
 			temp = temp->next;
 		}
 
-		while (temp->prev)
-		{
+		while (temp->prev) {
 			temp = temp->prev;
 			clear(temp->next);
 		}
+
 		clear(temp);
 	}
 
-	if (node->prev)
-	{
+	if (node->prev) {
 		node->prev->next = NULL;
 	}
+
 	printf("Freeing: %s.\n", node->stored_name);
 	free(node);
 }

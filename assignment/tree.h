@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "visitor.h"
 
 struct Node {
 	struct Node *prev;
@@ -22,6 +23,6 @@ struct Node {
 
 struct Node *create_node(char *name);
 void store(struct Node *parent, char *name);
-void print_tree(struct Node *node, int indentation);
-void indent(int count);
+void print_tree(struct Node *node, struct Visitor *visitor, int indentation);
+void indent(int requested_indentation);
 void clear(struct Node *node);

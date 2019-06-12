@@ -7,8 +7,8 @@
 #include "tree.h"
 #include "visitor.h"
 
-void main(void)
-{
+void main(void) {
+
 	//	Make root node and visitor.
 	struct Node *root_node = create_node("ROOT");
 	struct Visitor *cursor = create_visitor(root_node);
@@ -26,27 +26,16 @@ void main(void)
 	store(root_node->children_head->children_head->next, "Sarah");
 	
 	//	Print tree.
-	print_tree(root_node, 0);
+	print_tree(root_node, cursor, 0);
 
-	//	Cursor testing.
-	printf("%s\n", cursor->current->stored_name);
-	go_down(cursor);
-	printf("%s\n", cursor->current->stored_name);
+	//	Move cursor.
 	go_right(cursor);
-	printf("%s\n", cursor->current->stored_name);
 	go_down(cursor);
-	printf("%s\n", cursor->current->stored_name);
 	go_prev(cursor);
-	printf("%s\n", cursor->current->stored_name);
-	go_next(cursor);
-	printf("%s\n", cursor->current->stored_name);
-	go_next(cursor);
-	printf("%s\n", cursor->current->stored_name);
-	go_prev(cursor);
-	go_prev(cursor);
-	go_prev(cursor);
-	go_prev(cursor);
-	printf("%s\n", cursor->current->stored_name);
+
+	//	Print tree again.
+	print_tree(root_node, cursor, 0);
+
 
 	//	Clearing.
 	printf("\n");
