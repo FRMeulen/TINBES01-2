@@ -5,8 +5,11 @@ struct Node *create_node(char *name)
 	struct Node *new_node = malloc(sizeof(struct Node));
 	strcpy(new_node->stored_name, name);
 	new_node->next = NULL;
+	new_node->prev = NULL;
 	new_node->children_head = NULL;
+	new_node->parent = NULL;
 	new_node->depth = 0;
+	new_node->children_count = 0;
 
 	return new_node;
 }
@@ -15,7 +18,11 @@ void store(struct Node *parent, char* name)
 {
 	if (!parent->children_head)
 	{
-		parent->children_head = create_node(name);
+		struct Node *new_node = create_node(name);
+		parent->children_head = new_node;
+		new_node->parent = parent;
+		parent->children_count += 1;
+
 	}
 	else
 	{
@@ -28,6 +35,8 @@ void store(struct Node *parent, char* name)
 		struct Node *new_node = create_node(name);
 		temp->next = new_node;
 		new_node->prev = temp;
+		parent->children_count += 1;
+		new_node->parent = parent;
 	}
 }
 

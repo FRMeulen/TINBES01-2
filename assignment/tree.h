@@ -8,7 +8,9 @@ struct Node {
 	struct Node *prev;
 	struct Node *next;
 	struct Node *children_head;
+	struct Node *parent;
 	char stored_name[10];
+	int children_count;
 	int depth;
 };
 
