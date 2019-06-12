@@ -1,3 +1,8 @@
+//	Project:	TINBES01-2.
+//	visitor.h	--	Interface for the Visitor struct.
+//	Revisions:
+//	2019-06-12	--	F.R. van der Meulen	--	Created.
+
 #pragma once
 
 #include <stdlib.h>

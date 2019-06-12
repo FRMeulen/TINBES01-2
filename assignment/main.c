@@ -1,3 +1,9 @@
+//	Project:	TINBES01-2.
+//	main.c	--	Entry point for assignment.
+//	Revisions:
+//	2019-05-25	--	F.R. van der Meulen	--	Created.
+//	2019-06-12	--	F.R. van der Meulen	--	Visitor added.
+
 #include "tree.h"
 #include "visitor.h"
 

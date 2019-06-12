@@ -1,3 +1,8 @@
+//	Project:	TINBES01-2.
+//	visitor.c	--	Implementation of the Visitor struct.
+//	Revisions:
+//	2019-06-12	--	Created.
+
 #include "visitor.h"
 
 struct Visitor *create_visitor(struct Node *start) {

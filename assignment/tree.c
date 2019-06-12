@@ -1,3 +1,9 @@
+//	Project:	TINBES01-2.
+//	tree.c	--	Implementation of the Node struct.
+//	Revisions:
+//	2019-05-25	--	F.R. van der Meulen	--	Created.
+//	2019-06-12	--	F.R. van der Meulen	--	Nodes now doubly linked.
+
 #include "tree.h"
 
 struct Node *create_node(char *name)
