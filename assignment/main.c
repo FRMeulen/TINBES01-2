@@ -6,6 +6,7 @@
 
 #include "tree.h"
 #include "visitor.h"
+#include <stdbool.h>
 
 void main(void) {
 
@@ -28,14 +29,11 @@ void main(void) {
 	//	Print tree.
 	print_tree(root_node, cursor, 0);
 
-	//	Move cursor.
-	go_right(cursor);
-	go_down(cursor);
-	go_prev(cursor);
+	//	Close a node.
+	root_node->children_head->open = false;
 
 	//	Print tree again.
 	print_tree(root_node, cursor, 0);
-
 
 	//	Clearing.
 	printf("\n");

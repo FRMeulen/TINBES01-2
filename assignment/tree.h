@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "visitor.h"
+#include <stdbool.h>
 
 struct Node {
 	struct Node *prev;
@@ -19,6 +20,7 @@ struct Node {
 	char stored_name[10];
 	int children_count;
 	int depth;
+	bool open;
 };
 
 struct Node *create_node(char *name);

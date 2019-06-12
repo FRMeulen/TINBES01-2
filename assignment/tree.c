@@ -16,6 +16,7 @@ struct Node *create_node(char *name) {
 	new_node->parent = NULL;
 	new_node->depth = 0;
 	new_node->children_count = 0;
+	new_node->open = true;
 
 	return new_node;
 }
@@ -54,6 +55,12 @@ void print_tree(struct Node *node, struct Visitor *visitor, int indentation) {
 
 	else {
 		printf("%s\n", node->stored_name);
+	}
+
+	if (!node->open) {
+		indent(indentation + 1);
+		printf("...\n");
+		return;
 	}
 
 	if (node->children_head) {
