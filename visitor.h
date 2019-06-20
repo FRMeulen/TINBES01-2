@@ -26,3 +26,4 @@ bool go_last_child(struct Visitor *visitor);
 bool go_last_leaf(struct Visitor *visitor);
 bool go_next(struct Visitor *visitor);
 bool go_prev(struct Visitor *visitor);
+bool toggle_closed(struct Visitor *visitor);

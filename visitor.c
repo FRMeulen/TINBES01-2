@@ -52,7 +52,7 @@ bool go_left(struct Visitor *visitor) {
 //	This means the first child.
 bool go_right(struct Visitor *visitor) {
 	
-	if (visitor->current->children_head) {
+	if (visitor->current->open && visitor->current->children_head) {
 		visitor->current = visitor->current->children_head;
 		return true;
 	}
@@ -106,7 +106,7 @@ bool go_last_sibling(struct Visitor *visitor) {
 //	This means the child with no 'next'.
 bool go_last_child(struct Visitor *visitor) {
 	
-	if (visitor->current->children_head) {
+	if (visitor->current->open && visitor->current->children_head) {
 		visitor->current = visitor->current->children_head;
 
 		while (visitor->current->next) {
@@ -122,8 +122,8 @@ bool go_last_child(struct Visitor *visitor) {
 //	Moves the visitor to the 'bottom' of a tree.
 //	This means always picking the last child.
 bool go_last_leaf(struct Visitor *visitor) {
-	if (visitor->current->children_head) {
-		while (visitor->current->children_head) {
+	if (visitor->current->open && visitor->current->children_head) {
+		while (visitor->current->open && visitor->current->children_head) {
 			go_last_child(visitor);
 		}
 
@@ -140,7 +140,7 @@ bool go_last_leaf(struct Visitor *visitor) {
 //	3. Parent's next sibling.
 bool go_next(struct Visitor *visitor) {
 	
-	if (visitor->current->children_head) {
+	if (visitor->current->open && visitor->current->children_head) {
 		visitor->current = visitor->current->children_head;
 		return true;
 	}
@@ -181,5 +181,16 @@ bool go_prev(struct Visitor *visitor) {
 
 	else {
 		printf("No 'previous' exists!\n");
+	}
+}
+
+//	Closes the current node.
+bool toggle_closed(struct Visitor *visitor) {
+	if (visitor->current->open) {
+		visitor->current->open = false;
+	}
+	
+	else {
+		visitor->current->open = true;
 	}
 }

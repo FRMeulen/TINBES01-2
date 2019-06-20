@@ -10,6 +10,7 @@ struct Node *create_node(char *name) {
 	
 	struct Node *new_node = malloc(sizeof(struct Node));
 	strcpy(new_node->stored_name, name);
+	new_node->path = NULL;
 	new_node->next = NULL;
 	new_node->prev = NULL;
 	new_node->children_head = NULL;
@@ -21,12 +22,11 @@ struct Node *create_node(char *name) {
 	return new_node;
 }
 
-void store(struct Node *parent, char* name) {
+void store(struct Node *parent, struct Node *child) {
 
 	if (!parent->children_head) {
-		struct Node *new_node = create_node(name);
-		parent->children_head = new_node;
-		new_node->parent = parent;
+		parent->children_head = child;
+		child->parent = parent;
 		parent->children_count += 1;
 
 	}
@@ -38,16 +38,14 @@ void store(struct Node *parent, char* name) {
 			temp = temp->next;
 		}
 
-		struct Node *new_node = create_node(name);
-		temp->next = new_node;
-		new_node->prev = temp;
+		temp->next = child;
+		child->prev = temp;
 		parent->children_count += 1;
-		new_node->parent = parent;
+		child->parent = parent;
 	}
 }
 
-void print_tree(struct Node *node, struct Visitor *visitor, int indentation) {
-	
+void print_tree(struct Node *node, struct Visitor *visitor, int indentation) {		
 	indent(indentation);
 	if (node == visitor->current) {
 		printf(">%s<\n", node->stored_name);
