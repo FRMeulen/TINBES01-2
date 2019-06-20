@@ -10,7 +10,6 @@ struct Node *create_node(char *name) {
 	
 	struct Node *new_node = malloc(sizeof(struct Node));
 	strcpy(new_node->stored_name, name);
-	new_node->path = NULL;
 	new_node->next = NULL;
 	new_node->prev = NULL;
 	new_node->children_head = NULL;

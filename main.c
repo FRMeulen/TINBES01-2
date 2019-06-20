@@ -28,7 +28,7 @@ void list_files(char *base_path, struct Node *parent) {
 			strcpy(path, base_path);
 			strcat(path, "/");
 			strcat(path, dp->d_name);
-			dir_node->path = path;
+			strcpy(dir_node->path, path);
 			store(parent, dir_node);
 		}
 	}
@@ -56,7 +56,7 @@ void open_file(struct Node *file) {
 		strcat(command, " ");
 		strcat(command, file->path);
 
-		printf("Opening file: %s\n", file->path);
+		system(command);
 	}
 
 	else {
@@ -72,7 +72,7 @@ void main(void) {
 
 	//	Get directory info.
 	char path[1000];
-	list_files("/home/falco/Documents/TI/TESTING", root_node);
+	list_files("/home/falco/Documents/TI/TESTING/", root_node);
 	
 	//	Print tree.
 	system("clear");
