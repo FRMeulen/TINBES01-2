@@ -173,14 +173,17 @@ bool go_prev(struct Visitor *visitor) {
 	if (visitor->current->prev) {
 		visitor->current = visitor->current->prev;
 		go_last_leaf(visitor);
+		return true;
 	}
 
 	else if (visitor->current->parent) {
 		visitor->current = visitor->current->parent;
+		return true;
 	}
 
 	else {
 		printf("No 'previous' exists!\n");
+		return false;
 	}
 }
 
@@ -188,9 +191,11 @@ bool go_prev(struct Visitor *visitor) {
 bool toggle_closed(struct Visitor *visitor) {
 	if (visitor->current->open) {
 		visitor->current->open = false;
+		return true;
 	}
 	
 	else {
 		visitor->current->open = true;
+		return false;
 	}
 }
