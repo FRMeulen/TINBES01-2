@@ -97,7 +97,7 @@ void main(void) {
 
 	//	Get directory info.
 	char path[1000];
-	list_files("/home/falco/Documents/TI/TESTING/", root_node);
+	list_files("/home/falco/Documents/TI/TESTING", root_node);
 	
 	//	Print tree.
 	system("clear");
@@ -110,16 +110,11 @@ void main(void) {
 		//	Read command.
 		printf("\n");
 		printf("Commands:\n");
-		printf("	W - Up.\n");
-		printf("	S - Down.\n");
-		printf("	A - Left.\n");
-		printf("	D - Right.\n");
-		printf("	Z - Previous sibling.\n");
-		printf("	X - Next sibling.\n");
-		printf("	R - Root.\n");
-		printf("	O - Open file.\n");
-		printf("	C - Collapse/Expand.\n");
-		printf("	H - Help.\n");
+		printf("	W - Up.			S - Down.\n");
+		printf("	A - Left.		D - Right.\n");
+		printf("	Z - Previous sibling.	X - Next sibling.\n");
+		printf("	R - Root.		O - Open file.\n");
+		printf("	C - Collapse/Expand.	H - Help.\n");
 		printf("\n");
 		printf("Enter command: ");
 		scanf("%s", &command);
@@ -171,8 +166,8 @@ void main(void) {
 			system("clear");
 			printf("--Navigation Help Page--\n");
 			printf("The file navigation has several options:\n");
-			printf("	U - Moves the cursor to the node above the currently selected node.\n");
-			printf("	D - Moves the cursor to the node below the currently selected node.\n");
+			printf("	W - Moves the cursor to the node above the currently selected node.\n");
+			printf("	S - Moves the cursor to the node below the currently selected node.\n");
 			printf("	A - Moves the cursor to the parent of the currently selected node.\n");
 			printf("	D - Moves the cursor to the first child of the currently selected node.\n");
 			printf("	Z - Moves the cursor to the node above the currently selected node, but within the same layer.\n");

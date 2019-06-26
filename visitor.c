@@ -157,7 +157,13 @@ bool go_next(struct Visitor *visitor) {
 		}
 
 		else {
-			visitor->current = visitor->current->parent;
+			if (strcmp(visitor->current->parent->stored_name, "ROOT") != 0) {
+				visitor->current = visitor->current->parent;
+			}
+
+			else {
+				return false;
+			}
 		}
 	}
 
@@ -189,6 +195,10 @@ bool go_prev(struct Visitor *visitor) {
 
 //	Closes the current node.
 bool toggle_closed(struct Visitor *visitor) {
+	if (!visitor->current->children_head) {
+		return false;
+	}
+	
 	if (visitor->current->open) {
 		visitor->current->open = false;
 		return true;
@@ -196,6 +206,8 @@ bool toggle_closed(struct Visitor *visitor) {
 	
 	else {
 		visitor->current->open = true;
-		return false;
+		return true;
 	}
+	
+	return false;
 }
