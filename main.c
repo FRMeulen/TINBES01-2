@@ -59,6 +59,14 @@ void open_file(struct Node *file) {
 		system(command);
 	}
 
+	else if (strstr(file->stored_name, ".pdf") != NULL) {
+		char command[1000] = "firefox";
+		strcat(command, " ");
+		strcat(command, file->path);
+
+		system(command);
+	}
+
 	else {
 		printf("Error! Not a file!");
 	}
