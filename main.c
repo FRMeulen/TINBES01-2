@@ -51,8 +51,9 @@ void list_files(char *base_path, struct Node *parent) {
 }
 
 void open_file(struct Node *file) {
+	char command[1000];
 	if (strstr(file->stored_name, ".txt") != NULL) {
-		char command[1000] = "vim";
+		strcpy(command, "vim");
 		strcat(command, " ");
 		strcat(command, file->path);
 
@@ -60,7 +61,23 @@ void open_file(struct Node *file) {
 	}
 
 	else if (strstr(file->stored_name, ".pdf") != NULL) {
-		char command[1000] = "firefox";
+		strcpy(command, "firefox");
+		strcat(command, " ");
+		strcat(command, file->path);
+
+		system(command);
+	}
+
+	else if (strstr(file->stored_name, ".png") != NULL) {
+		strcpy(command, "xdg-open");
+		strcat(command, " ");
+		strcat(command, file->path);
+
+		system(command);
+	}
+
+	else if (strstr(file->stored_name, ".jpg") != NULL) {
+		strcpy(command, "xdg-open");
 		strcat(command, " ");
 		strcat(command, file->path);
 
