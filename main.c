@@ -117,8 +117,8 @@ void main(void) {
 		printf("	Z - Previous sibling.\n");
 		printf("	X - Next sibling.\n");
 		printf("	R - Root.\n");
-		printf("	O - Open file in vim.\n");
-		printf("	C - Open/Close.\n");
+		printf("	O - Open file.\n");
+		printf("	C - Collapse/Expand.\n");
 		printf("	H - Help.\n");
 		printf("\n");
 		printf("Enter command: ");
@@ -178,8 +178,8 @@ void main(void) {
 			printf("	Z - Moves the cursor to the node above the currently selected node, but within the same layer.\n");
 			printf("	X - Moves the cursor to the node below the currently selected node, but within the same layer.\n");
 			printf("	R - Moves the cursor to the root node.\n");
-			printf("	O - Opens the file at the cursor in vim.\n");
-			printf("	C - Closes or opens the currently selected node, hiding all children.\n");
+			printf("	O - Opens the file at the cursor.\n");
+			printf("	C - Collapses or expands the currently selected node, hiding/showing all children.\n");
 			printf("	Q - Exits the program.\n");
 			printf("	H - Displays this help page.\n");
 			printf("\n");
